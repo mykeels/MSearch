@@ -220,5 +220,15 @@ namespace MSearch.ABC
         {
             return this._bestFitness;
         }
+
+        public int getFailureLimit()
+        {
+            return this._failureLimit + 0; //(val + 0) done to force pass-by-value
+        }
+
+        public double getAcceptanceProbability()
+        {
+            return this._acceptProbability + 0;  //(val + 0) done to force pass-by-value
+        }
     }
 }

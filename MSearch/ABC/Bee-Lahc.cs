@@ -3,12 +3,12 @@ using MSearch.Common;
 
 namespace MSearch.ABC
 {
-    public class BeeLahc<FoodSource> : Bee<FoodSource>, IBee<FoodSource>
+    public class BeeLahc<FoodType> : Bee<FoodType>, IBee<FoodType>
     {
         protected override int _timeSinceLastImprovement { get; set; }
         protected override int _nonImprovementLimit { get; set; }
-        protected override Func<FoodSource, FoodSource> _mutationFunc { get; set; }
-        protected override Func<FoodSource, double> _fitnessFunc { get; set; }
+        protected override Func<FoodType, FoodType> _mutationFunc { get; set; }
+        protected override Func<FoodType, double> _fitnessFunc { get; set; }
         private LAHC lahc { get; set; }
         public bool useLahc { get; set; }
 
@@ -20,7 +20,7 @@ namespace MSearch.ABC
             this.lahc = new LAHC(20, this.Fitness, Search.Direction.Optimization);
         }
 
-        public BeeLahc(Func<FoodSource, FoodSource> mFunc, Func<FoodSource, double> fFunc, BeeTypeClass _type,
+        public BeeLahc(Func<FoodType, FoodType> mFunc, Func<FoodType, double> fFunc, BeeTypeClass _type,
             int ID = 0, int _failureLimit = 20, int _tableSize = 50, Search.Direction movement = Search.Direction.Optimization)
         {
             if ((movement == Search.Direction.Divergence))
@@ -45,10 +45,10 @@ namespace MSearch.ABC
             this.Movement = movement;
         }
 
-        public override FoodSource Mutate()
+        public override FoodType Mutate()
         {
-            FoodSource ret = _mutationFunc(this.Food);
-            double _fitness = Bee<FoodSource>.GetFitness(ret, _fitnessFunc);
+            FoodType ret = _mutationFunc(this.Food);
+            double _fitness = Bee<FoodType>.GetFitness(ret, _fitnessFunc);
             if (this.Fitness.Equals(defaultFitness) || _fitness < this.Fitness || (useLahc && this.lahc.Update(_fitness)))
             {
                 this.Fitness = _fitness;

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MSearch.Tests
+namespace MSearch.Tests.HillClimb
 {
-    public class ABC_Test
+    public class HillClimb_Test
     {
 
     }

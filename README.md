@@ -10,4 +10,4 @@ Please see the [project documentation](Documentation.md) here.
 
 ### Author(s)
 
- - Ikechi Michael I. ([github](https://github.com/mykeels), [twitter](https://github.com/twitter))
+ - Ikechi Michael I. ([github](https://github.com/mykeels), [twitter](https://twitter.com/mykeels))

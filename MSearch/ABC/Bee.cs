@@ -3,18 +3,18 @@ using MSearch.Common;
 
 namespace MSearch.ABC
 {
-    public class Bee<FoodSource> : IBee<FoodSource>
+    public class Bee<FoodType> : IBee<FoodType>
     {
         public int ID { get; set; }
         public BeeTypeClass Type { get; set; }
-        public FoodSource Food { get; set; }
+        public FoodType Food { get; set; }
         public double Fitness { get; set; }
         public double defaultFitness { get; set; }
         public Search.Direction Movement { get; set; }
         protected virtual int _timeSinceLastImprovement { get; set; }
         protected virtual int _nonImprovementLimit { get; set; }
-        protected virtual Func<FoodSource, FoodSource> _mutationFunc { get; set; }
-        protected virtual Func<FoodSource, double> _fitnessFunc { get; set; }
+        protected virtual Func<FoodType, FoodType> _mutationFunc { get; set; }
+        protected virtual Func<FoodType, double> _fitnessFunc { get; set; }
 
         public Bee()
         {
@@ -23,12 +23,12 @@ namespace MSearch.ABC
             this.Type = BeeTypeClass.Scout;
         }
 
-        public Bee(Func<FoodSource, FoodSource> mFunc, Func<FoodSource, double> fFunc, BeeTypeClass _type, int ID = 0, int _failureLimit = 20, Search.Direction movement = Search.Direction.Optimization)
+        public Bee(Func<FoodType, FoodType> mFunc, Func<FoodType, double> fFunc, BeeTypeClass _type, int ID = 0, int _failureLimit = 20, Search.Direction movement = Search.Direction.Optimization)
         {
             this.Init(mFunc, fFunc, _type, ID, _failureLimit, movement);
         }
 
-        public void Init(Func<FoodSource, FoodSource> mFunc, Func<FoodSource, double> fFunc, BeeTypeClass _type, int ID = 0, int _failureLimit = 20, Search.Direction movement = Search.Direction.Optimization)
+        public void Init(Func<FoodType, FoodType> mFunc, Func<FoodType, double> fFunc, BeeTypeClass _type, int ID = 0, int _failureLimit = 20, Search.Direction movement = Search.Direction.Optimization)
         {
             if ((movement == Search.Direction.Divergence))
             {
@@ -51,7 +51,7 @@ namespace MSearch.ABC
             this.Movement = movement;
         }
 
-        public void ChangeToEmployed(FoodSource _food, Func<FoodSource, FoodSource> mFunc = null, Func<FoodSource, double> fFunc = null)
+        public void ChangeToEmployed(FoodType _food, Func<FoodType, FoodType> mFunc = null, Func<FoodType, double> fFunc = null)
         {
             this._timeSinceLastImprovement = 0;
             this.Type = BeeTypeClass.Employed;
@@ -70,7 +70,7 @@ namespace MSearch.ABC
         public void ChangeToOnlooker()
         {
             this.Type = BeeTypeClass.Onlooker;
-            this.Food = default(FoodSource);
+            this.Food = default(FoodType);
             this.Fitness = defaultFitness;
             this._timeSinceLastImprovement = 0;
         }
@@ -78,7 +78,7 @@ namespace MSearch.ABC
         public void ChangeToScout()
         {
             this.Type = BeeTypeClass.Scout;
-            this.Food = default(FoodSource);
+            this.Food = default(FoodType);
             this.Fitness = defaultFitness;
         }
 
@@ -98,22 +98,22 @@ namespace MSearch.ABC
             return Type;
         }
 
-        public FoodSource GetFood()
+        public FoodType GetFood()
         {
             return Food;
         }
 
-        public FoodSource SetFood(FoodSource food)
+        public FoodType SetFood(FoodType food)
         {
             this.Food = food;
             return food;
         }
 
         #region "EmployedBees"
-        public virtual FoodSource Mutate()
+        public virtual FoodType Mutate()
         {
-            FoodSource ret = _mutationFunc(this.Food);
-            double _fitness = Bee<FoodSource>.GetFitness(ret, _fitnessFunc);
+            FoodType ret = _mutationFunc(this.Food);
+            double _fitness = Bee<FoodType>.GetFitness(ret, _fitnessFunc);
             if (this.Fitness.Equals(defaultFitness) | (Movement == Search.Direction.Optimization && _fitness < this.Fitness) ||
                 (Movement == Search.Direction.Divergence && _fitness > this.Fitness))
             {
@@ -146,7 +146,7 @@ namespace MSearch.ABC
         }
         #endregion
 
-        public static double GetFitness(FoodSource _food, Func<FoodSource, double> _fitnessFunc)
+        public static double GetFitness(FoodType _food, Func<FoodType, double> _fitnessFunc)
         {
             return _fitnessFunc(_food);
         }

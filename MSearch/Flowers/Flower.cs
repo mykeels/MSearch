@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MSearch.Tests
+namespace MSearch.Flowers
 {
-    public class HillClimb_Test
+    public class Flower<PollenType>
     {
 
     }

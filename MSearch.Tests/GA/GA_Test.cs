@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MSearch.Tests
+namespace MSearch.Tests.GA
 {
     public class GA_Test
     {
