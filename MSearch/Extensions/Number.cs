@@ -11,9 +11,9 @@ namespace MSearch.Extensions
         private static int seed = DateTime.Now.Millisecond;
         static Random rand = new Random(DateTime.Now.Millisecond);
 
-        public static double Rnd()
+        public static double Rnd(double multiplicand = 1)
         {
-            return rand.NextDouble();
+            return rand.NextDouble() * multiplicand;
         }
     }
 }
