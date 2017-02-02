@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MSearch.Extensions;
 using MSearch.Common;
+using Newtonsoft.Json;
 
 namespace MSearch.Tests.Problems
 {
@@ -45,11 +44,13 @@ namespace MSearch.Tests.Problems
             }
         }
 
-        public List<int> getInitialSolution()
+        public List<int> getInitialSolution() => getInitialSolution(1);
+
+        public List<int> getInitialSolution(int length)
         {
             line1:
             List<int> ret = new List<int>();
-            while (ret.Count < 1)
+            while (ret.Count < length)
             {
                 int x = (int)Math.Floor(Number.Rnd() * items.Count);
                 if (!ret.Contains(x)) ret.Add(x);
@@ -190,178 +191,6 @@ namespace MSearch.Tests.Problems
             return ret;
         }
 
-        public Knapsack readProblemTypeOne(string filepath)
-        {
-            int i = 0;
-            int countItemValues = 0, countItemsWeights = 0;
-            List<Item> retItems = new List<Item>();
-            int knapsackCapacitiesLineReached = 0;
-
-            string[] lines = System.IO.File.ReadAllLines(filepath);
-            for (int index = 0; index < lines.Length; index++)
-            {
-                string line = lines[index];
-                line = line.TrimStart(' ');
-                string[] ss = line.Split(' ');
-                if (i == 0)
-                {
-                    this.noOfKnapsacks = Convert.ToInt32(ss[0]);
-                    this.noOfItems = Convert.ToInt32(ss[1]);
-                }
-                else
-                {
-                    if (countItemValues < this.noOfItems)
-                    {
-                        foreach (string sss in ss)
-                        {
-                            if (sss == "//") break;
-                            else
-                            {
-                                if (sss != "")
-                                {
-                                    Item item = new Item(Convert.ToDouble(sss), new List<double>());
-                                    this.items.Add(item);
-                                    countItemValues++;
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (knapsackCapacitiesLineReached < this.noOfKnapsacks)
-                        {
-                            foreach (string sss in ss)
-                            {
-                                if (sss == "//") break;
-                                else
-                                {
-                                    if (sss != "")
-                                    {
-                                        this.weights.Add(Convert.ToDouble(sss));
-                                        knapsackCapacitiesLineReached++;
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            //last lines
-                            if (countItemsWeights < this.noOfItems && i < lines.Count() - 1)
-                            {
-                                foreach (string sss in ss)
-                                {
-                                    if (sss == "//") break;
-                                    else
-                                    {
-                                        if (sss != "")
-                                        {
-                                            this.items[countItemsWeights].weights.Add(Convert.ToDouble(sss));
-                                            countItemsWeights++;
-                                            if (countItemsWeights == this.noOfItems) countItemsWeights = 0;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                if (i == lines.Count() - 1)
-                {
-                    string[] sss = line.Split(' ');
-                    foreach (string ssss in sss)
-                    {
-                        if (ssss != "")
-                        {
-                            this.goal = Convert.ToInt32(ssss);
-                            break;
-                        }
-                    }
-                }
-                i++;
-            }
-            return this;
-        }
-
-        public Knapsack readProblemTypeTwo(string filename)
-        {
-            int i = 0;
-            int countMaxWeights = 0;
-            int countItemsWeights = 0;
-            int stage = 0;
-            string[] lines = System.IO.File.ReadAllLines(filename);
-            foreach (string s_loopVariable in lines)
-            {
-                string s = s_loopVariable;
-                s = s.Trim();
-                string[] ss = s.Split(' ');
-                if (i == 1)
-                {
-                    this.noOfKnapsacks = Convert.ToInt32(ss[1]);
-                    this.noOfItems = Convert.ToInt32(ss[0]);
-                    if (ss.Length > 2)
-                    {
-                        this.goal = Convert.ToInt32(ss[2]);
-                    }
-                    i += 1;
-                    //first stage
-                }
-                else if (i == 0) { i++; }
-                else if (i == 2)
-                {
-                    if (this.items.Count() < this.noOfItems)
-                    {
-                        foreach (string sss_loopVariable in ss)
-                        {
-                            string sss = sss_loopVariable;
-                            this.items.Add(new Item(Convert.ToDouble(sss), new List<double>()));
-                        }
-                    }
-                    else
-                    {
-                        i += 1;
-                    }
-                }
-                if (i == 3)
-                {
-                    if (countItemsWeights < this.noOfKnapsacks)
-                    {
-                        for (int index = 0; index <= ss.Length - 1; index++)
-                        {
-                            this.items[stage].weights.Add(Convert.ToDouble(ss[index]));
-                            stage += 1;
-                        }
-                        if (stage == this.noOfItems)
-                        {
-                            countItemsWeights += 1;
-                            stage = 0;
-                        }
-
-                    }
-                    else
-                    {
-                        i += 1;
-                    }
-                }
-                if (i == 4)
-                {
-                    if (countMaxWeights < this.noOfKnapsacks)
-                    {
-                        foreach (string sss_loopVariable in ss)
-                        {
-                            string sss = sss_loopVariable;
-                            this.weights.Add(Convert.ToDouble(sss));
-                            countMaxWeights += 1;
-                        }
-                    }
-                    else
-                    {
-                        i += 1;
-                    }
-                }
-            }
-            return this;
-        }
-
         public Configuration<List<int>> getConfiguration()
         {
             Configuration<List<int>> config = new Configuration<List<int>>();
@@ -369,7 +198,7 @@ namespace MSearch.Tests.Problems
             config.initializeSolutionFunction = this.getInitialSolution;
             config.movement = Search.Direction.Divergence;
             config.mutationFunction = this.mutate;
-            config.noOfIterations = 100500;
+            config.noOfIterations = 2000;
             config.objectiveFunction = this.getFitness;
             config.populationSize = 50;
             config.selectionFunction = Selection.RoulleteWheel;
@@ -380,6 +209,18 @@ namespace MSearch.Tests.Problems
             };
             config.enforceHardObjective = true;
             return config;
+        }
+        
+        public Knapsack Load(string filePath)
+        {
+            if (!filePath.EndsWith(".json")) throw new Exception($"File Path: [{filePath}] should match pattern *.json");
+            var knapsack = JsonConvert.DeserializeObject<Knapsack>(System.IO.File.ReadAllText(filePath));
+            this.goal = knapsack.goal;
+            this.items = knapsack.items;
+            this.noOfItems = knapsack.noOfItems;
+            this.noOfKnapsacks = knapsack.noOfKnapsacks;
+            this.weights = knapsack.weights;
+            return this;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace MSearch.Tests.Problems
 {
     public class Knapsack_Problem
     {
-        public List<Knapsack> readProblemTypeTwo(string filename)
+        public List<Knapsack> readProblem(string filename)
         {
             int countMaxWeights = 0;
             int countItemsWeights = 0;
@@ -92,6 +92,13 @@ namespace MSearch.Tests.Problems
                 ret.Add(knapsack);
             }
             return ret;
+        }
+
+        public class BestResult
+        {
+            public string filename { get; set; }
+            public int best { get; set; }
+            public int index { get; set; }
         }
     }
 }
