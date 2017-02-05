@@ -23,5 +23,15 @@ namespace MSearch.Tests.Flowers
             garden.create(sphere.getConfiguration());
             garden.fullIteration();
         }
+
+        [TestMethod]
+        public void Test_That_Flower_Pollination_On_Binary_Knapsack_Works()
+        {
+            Pollination<double[]> garden = new Pollination<double[]>();
+            BinaryKnapsack bKnapsack = new BinaryKnapsack();
+            bKnapsack.Load($"data/knapsacks/json/mknapcb1/mknapcb1-1.json");
+            garden.create(bKnapsack.getConfiguration());
+            garden.fullIteration();
+        }
     }
 }

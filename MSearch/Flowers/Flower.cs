@@ -56,6 +56,10 @@ namespace MSearch.Flowers
                 newFlowerSolList[i] = (double)newFlowerSolList[i] + Distribution.generateLevy((double)gBestList[i] - (double)newFlowerSolList[i]);
             }
             newFlower.solution = (PollenType)newFlowerSolList;
+            if (config.enforceHardObjective && !config.hardObjectiveFunction(newFlower.solution))
+            {
+                return this.clone();
+            }
             newFlower.fitnessNeedsUpdate = true;
             return newFlower;
         }
@@ -72,6 +76,10 @@ namespace MSearch.Flowers
                 newFlowerSolList[i] = (double)newFlowerSolList[i] + Number.Rnd(((double)flower1SolList[i] - (double)flower2SolList[i]));
             }
             newFlower.solution = (PollenType)newFlowerSolList;
+            if (config.enforceHardObjective && !config.hardObjectiveFunction(newFlower.solution))
+            {
+                return this.clone();
+            }
             newFlower.fitnessNeedsUpdate = true;
             return newFlower;
         }

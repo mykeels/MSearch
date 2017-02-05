@@ -74,7 +74,7 @@ namespace MSearch.Tests.Problems.Sphere
             config.populationSize = 5;
             config.writeToConsole = true;
             config.consoleWriteInterval = 100;
-            config.enforceHardObjective = true;
+            config.enforceHardObjective = false;
             config.selectionFunction = Selection.RoulleteWheel;
             return config;
         }

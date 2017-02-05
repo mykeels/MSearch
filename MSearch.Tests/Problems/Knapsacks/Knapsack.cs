@@ -221,6 +221,7 @@ namespace MSearch.Tests.Problems.Knapsacks
             this.noOfItems = knapsack.noOfItems;
             this.noOfKnapsacks = knapsack.noOfKnapsacks;
             this.weights = knapsack.weights;
+            Console.WriteLine($"Goal:\t{this.goal}");
             return this;
         }
     }

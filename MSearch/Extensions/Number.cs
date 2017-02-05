@@ -8,7 +8,6 @@ namespace MSearch.Extensions
 {
     public class Number
     {
-        private static int seed = DateTime.Now.Millisecond;
         static Random rand = new Random(DateTime.Now.Millisecond);
 
         public static double Rnd(double multiplicand = 1)
