@@ -116,8 +116,8 @@ namespace MSearch.SA
         private double defaultAcceptanceProbabilityFunction(double oldFitness, double newFitness)
         {
             if (Config.newFitnessIsBetter(oldFitness, newFitness)) return 1;
-            else if (Config.movement == Search.Direction.Divergence) return 1 / (1 + Math.Exp((newFitness - oldFitness) / _temperature));
-            else return 1 / (1 + Math.Exp((oldFitness - newFitness) / _temperature));
+            else if (Config.movement == Search.Direction.Divergence) return 1 / (1 + Math.Exp((oldFitness - newFitness) / _temperature));
+            else return 1 / (1 + Math.Exp((newFitness - oldFitness) / _temperature));
         }
 
         private double defaultTemperatureUpdate(double temperature)

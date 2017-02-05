@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using MSearch.Tests.Problems.Knapsacks;
 using MSearch.Tests.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MSearch.Tests.Problems.Sphere;
 using MSearch.SA;
 
 namespace MSearch.Tests.SA
 {
     [TestClass]
-    public class SimulatedAnnealing_Knapsack_Test: Knapsack
+    public class SimulatedAnnealing_Tests: Knapsack
     {
         [TestMethod]
         public void Test_That_Knapsack_Simulated_Annealing_Works()
@@ -21,6 +22,15 @@ namespace MSearch.Tests.SA
             SimulatedAnnealing<List<int>> sa = new SimulatedAnnealing<List<int>>();
             sa.create(this.getConfiguration());
             List<int> finalSolution = sa.fullIteration();
+        }
+
+        [TestMethod]
+        public void Test_That_Simulated_Annealing_On_Sphere_Works()
+        {
+            SimulatedAnnealing<double[]> garden = new SimulatedAnnealing<double[]>();
+            Sphere sphere = new Sphere();
+            garden.create(sphere.getConfiguration());
+            garden.fullIteration();
         }
     }
 }

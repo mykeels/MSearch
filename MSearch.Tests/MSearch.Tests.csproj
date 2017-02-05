@@ -45,26 +45,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ABC\ABC_Knapsack_Test.cs" />
-    <Compile Include="ABC\ABC_Test.cs" />
+    <Compile Include="ABC\ABC_Tests.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Distribution_Tests.cs" />
-    <Compile Include="Flowers\Flowers_Sphere_Tests.cs" />
-    <Compile Include="GA\GA_Knapsack_Test.cs" />
-    <Compile Include="GA\GA_Test.cs" />
+    <Compile Include="Flowers\Flowers_Tests.cs" />
+    <Compile Include="GA\GA_Tests.cs" />
     <Compile Include="Helpers\IO\Directory.cs" />
     <Compile Include="Helpers\IO\File.cs" />
     <Compile Include="Helpers\Site.cs" />
-    <Compile Include="HillClimb\HillClimb_Knapsack_Test.cs" />
-    <Compile Include="HillClimb\HillClimb_Test.cs" />
+    <Compile Include="HillClimb\HillClimb_Tests.cs" />
     <Compile Include="Problems\Knapsacks\Knapsack.cs" />
-    <Compile Include="Problems\Knapsacks\Knapsack_Flowers.cs" />
     <Compile Include="Problems\Knapsacks\Knapsack_Problem.cs" />
     <Compile Include="Problems\Knapsacks\Knapsack_Tests.cs" />
     <Compile Include="Problems\Sphere\Sphere.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SA\SA_Test.cs" />
-    <Compile Include="SA\SimulatedAnnealing_Knapsack_Test.cs" />
+    <Compile Include="SA\SimulatedAnnealing_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\Knapsacks\json\best-results.json">

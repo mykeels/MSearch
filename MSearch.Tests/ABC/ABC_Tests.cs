@@ -1,17 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MSearch.ABC;
-using Newtonsoft.Json;
+using MSearch.Tests.Problems.Knapsacks;
+using MSearch.Tests.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
+using MSearch.ABC;
 
 namespace MSearch.Tests.ABC
 {
     [TestClass]
-    public class ABC_Test
+    public class ABC_Tests: Knapsack
     {
+        [TestMethod]
+        public void Test_That_Knapsack_ABC_Works(Knapsack k)
+        {
+            this.Load(Constants.SAMPLE_MKNAPCB4_DATASET);
+            Console.WriteLine($"Goal:\t{this.goal}");
+            Hive<List<int>, Bee<List<int>>> hive = new Hive<List<int>, Bee<List<int>>>();
+            hive.create(k.getConfiguration());
+            List<int> finalResult =  hive.fullIteration();
+        }
+
         [TestMethod]
         [Description("Test That FailureLimit and AcceptProbability are defaults when instantiated with default constructor")]
         public void Test_That_FailureLimit_And_AcceptProbability_Are_Defaults()

@@ -68,7 +68,7 @@ namespace MSearch.HillClimb
                     _bestFitness = newFit;
                 }
             }
-            if (Config.writeToConsole && _iterationCount % Config.consoleWriteInterval == 0) Console.WriteLine(_iterationCount + "\t" + _bestIndividual.ToJson() + " = " + _bestFitness);
+            if (Config.writeToConsole && ((_iterationCount % Config.consoleWriteInterval == 0) || (_iterationCount - 1 == 0))) Console.WriteLine(_iterationCount + "\t" + _bestIndividual.ToJson() + " = " + _bestFitness);
             return _bestIndividual;
         }
 
