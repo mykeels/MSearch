@@ -8,6 +8,21 @@ In computer science and mathematical optimization, a meta-heuristic is a higher-
 
 Please see the [project documentation](Documentation.md) here.
 
+### Algorithms available
+
+- [Artificial Bee Colony (ABC)](MSearch/ABC)
+- [Flower Pollination Algorithm](MSearch/Flowers)
+- [Genetic Algorithm](MSearch/GA)
+- [HillClimbing Algorithm](MSearch/HillClimb)
+- [Simulated Annealing](MSearch/SA)
+
+### How to Use
+
+- Fork the project, or [download the zipped project](https://github.com/mykeels/MSearch/archive/master.zip)
+- Open MSearch.sln in [Visual Studio 2012](https://www.visualstudio.com/downloads) or later
+- Build the project to get a DLL in the bin/debug folder
+- Use the DLL in your project as the [license](LICENSE) allows
+
 ### Author(s)
 
  - Ikechi Michael I. ([github](https://github.com/mykeels), [twitter](https://twitter.com/mykeels))
