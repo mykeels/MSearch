@@ -49,6 +49,7 @@
     <Compile Include="ABC\ABC_Test.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Distribution_Tests.cs" />
+    <Compile Include="Flowers\Flowers_Sphere_Tests.cs" />
     <Compile Include="GA\GA_Knapsack_Test.cs" />
     <Compile Include="GA\GA_Test.cs" />
     <Compile Include="Helpers\IO\Directory.cs" />
@@ -56,10 +57,11 @@
     <Compile Include="Helpers\Site.cs" />
     <Compile Include="HillClimb\HillClimb_Knapsack_Test.cs" />
     <Compile Include="HillClimb\HillClimb_Test.cs" />
-    <Compile Include="Problems\Knapsack.cs" />
-    <Compile Include="Problems\Knapsack_HillClimb.cs" />
-    <Compile Include="Problems\Knapsack_Problem.cs" />
-    <Compile Include="Problems\Knapsack_Tests.cs" />
+    <Compile Include="Problems\Knapsacks\Knapsack.cs" />
+    <Compile Include="Problems\Knapsacks\Knapsack_Flowers.cs" />
+    <Compile Include="Problems\Knapsacks\Knapsack_Problem.cs" />
+    <Compile Include="Problems\Knapsacks\Knapsack_Tests.cs" />
+    <Compile Include="Problems\Sphere\Sphere.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SA\SA_Test.cs" />
     <Compile Include="SA\SimulatedAnnealing_Knapsack_Test.cs" />
@@ -384,9 +386,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Flowers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

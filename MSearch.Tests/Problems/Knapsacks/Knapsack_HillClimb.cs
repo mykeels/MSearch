@@ -9,7 +9,7 @@ using MSearch.Extensions;
 using Newtonsoft.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MSearch.Tests.Problems
+namespace MSearch.Tests.Problems.Knapsacks
 {
     [TestClass]
     public class Knapsack_HillClimb

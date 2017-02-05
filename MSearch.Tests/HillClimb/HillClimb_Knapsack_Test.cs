@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MSearch.Tests.Problems;
+using MSearch.Tests.Problems.Knapsacks;
 using MSearch.HillClimb;
+using MSearch.Tests.Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MSearch.Tests.HillClimb
 {
+    [TestClass]
     public class HillClimb_Knapsack_Test: Knapsack
     {
-        public List<int> solveWithHillClimb()
+        [TestMethod]
+        public void Test_That_Knapsack_Hill_Climbing_Works()
         {
-            HillClimb<List<int>> hc = new HillClimb<List<int>>();
-            hc.create(this.getConfiguration());
-            return hc.fullIteration();
+            this.Load(Constants.SAMPLE_MKNAPCB4_DATASET);
+            Console.WriteLine($"Goal:\t{this.goal}");
+            HillClimb<List<int>> hillClimb = new HillClimb<List<int>>();
+            hillClimb.create(this.getConfiguration());
+            List<int> finalSolution = hillClimb.fullIteration();
         }
     }
 }

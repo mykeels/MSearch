@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MSearch.Tests.Problems
+namespace MSearch.Tests.Problems.Knapsacks
 {
     public class Knapsack_Problem
     {

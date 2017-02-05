@@ -43,8 +43,8 @@ namespace MSearch.Flowers
                 var _bestSolution = this.singleIteration();
                 var _bestFitness = this.getBestFlower().getFitness();
                 this._iterationFitnessSequence.Add(_bestFitness);
+                if (this._config.writeToConsole && ((_iterationCount % this._config.consoleWriteInterval) == 0)) Console.WriteLine(_iterationCount + "\t" + _bestSolution.ToJson() + " = " + _bestFitness);
                 this._iterationCount++;
-                if (this._config.writeToConsole && _iterationCount % this._config.consoleWriteInterval == 0) Console.WriteLine(_iterationCount + "\t" + _bestSolution.ToJson() + " = " + _bestFitness);
             }
             return this.getBestFlower().getSolution();
         }

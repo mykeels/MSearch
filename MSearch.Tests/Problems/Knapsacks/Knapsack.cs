@@ -5,7 +5,7 @@ using MSearch.Extensions;
 using MSearch.Common;
 using Newtonsoft.Json;
 
-namespace MSearch.Tests.Problems
+namespace MSearch.Tests.Problems.Knapsacks
 {
     public partial class Knapsack
     {
@@ -198,11 +198,12 @@ namespace MSearch.Tests.Problems
             config.initializeSolutionFunction = this.getInitialSolution;
             config.movement = Search.Direction.Divergence;
             config.mutationFunction = this.mutate;
-            config.noOfIterations = 2000;
+            config.noOfIterations = 5000;
             config.objectiveFunction = this.getFitness;
             config.populationSize = 50;
             config.selectionFunction = Selection.RoulleteWheel;
             config.writeToConsole = true;
+            config.consoleWriteInterval = 100;
             config.hardObjectiveFunction = (List<int> sol) =>
             {
                 return this.getFitness(sol) < Double.MaxValue;
