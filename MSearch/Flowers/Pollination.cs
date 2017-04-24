@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace MSearch.Flowers
 {
-    public class Pollination<PollenType>: IMetaHeuristic<PollenType>
+    public class Pollination<TPollenType>: IMetaHeuristic<TPollenType>
     {
-        private Flower<PollenType>[] _flowers = null;
-        private Configuration<PollenType> _config = null;
-        private Flower<PollenType> _gBest = null;
+        private Flower<TPollenType>[] _flowers = null;
+        private Configuration<TPollenType> _config = null;
+        private Flower<TPollenType> _gBest = null;
         private double _switchProbability = 0;
         private int _iterationCount = 0;
         private List<double> _iterationFitnessSequence = new List<double>();
@@ -20,23 +20,23 @@ namespace MSearch.Flowers
 
         }
 
-        private Flower<PollenType>[] generateFlowers(int count)
+        private Flower<TPollenType>[] generateFlowers(int count)
         {
-            List<Flower<PollenType>> flowers = new List<Flower<PollenType>>();
+            List<Flower<TPollenType>> flowers = new List<Flower<TPollenType>>();
             for (int i = 0; i < count; i++)
             {
-                flowers.Add(new Flower<PollenType>(_config));
+                flowers.Add(new Flower<TPollenType>(_config));
             }
             return flowers.ToArray();
         }
 
-        public void create(Configuration<PollenType> config)
+        public void create(Configuration<TPollenType> config)
         {
             this._config = config;
             this._flowers = this.generateFlowers(config.populationSize);
         }
 
-        public PollenType fullIteration()
+        public TPollenType fullIteration()
         {
             while (_iterationCount < _config.noOfIterations)
             {
@@ -59,7 +59,7 @@ namespace MSearch.Flowers
             return localBestFitness;
         }
 
-        public Flower<PollenType> getLocalBestFlower()
+        public Flower<TPollenType> getLocalBestFlower()
         {
             var localBest = this._flowers.Where(flower => flower.getFitness() == getLocalBestFitness()).FirstOrDefault();
             return localBest;
@@ -76,7 +76,7 @@ namespace MSearch.Flowers
             return this._iterationFitnessSequence;
         }
 
-        public Flower<PollenType> getBestFlower()
+        public Flower<TPollenType> getBestFlower()
         {
             var localBest = getLocalBestFlower();
             if (_gBest == null || _config.newFitnessIsBetter(_gBest.getFitness(), localBest.getFitness()))
@@ -86,12 +86,12 @@ namespace MSearch.Flowers
             return _gBest;
         }
 
-        public PollenType singleIteration()
+        public TPollenType singleIteration()
         {
             for (int i = 0; i < this._flowers.Length; i++)
             {
                 var flower = this._flowers[i];
-                Flower<PollenType> flowerClone = null;
+                Flower<TPollenType> flowerClone = null;
                 if (Number.Rnd() < this._switchProbability)
                 {
                     //perform global pollination
@@ -107,7 +107,7 @@ namespace MSearch.Flowers
                     if (a == b) goto line1;
                     flowerClone = flower.doLocalPollination(this._flowers[a], this._flowers[b]);
                 }
-                if (_config.newFitnessIsBetter(this._flowers[i].getFitness(), flowerClone.getFitness()))
+                if (_config.newFitnessIsBetter(this._flowers[i].getFitness(), flowerClone.getFitness()) && ((_config.enforceHardObjective && _config.hardObjectiveFunction != null && _config.hardObjectiveFunction.Invoke(flowerClone.getSolution())) || (!_config.enforceHardObjective || _config.hardObjectiveFunction == null)))
                 {
                     this._flowers[i] = flowerClone;
                 }

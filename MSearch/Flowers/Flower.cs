@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 
 namespace MSearch.Flowers
 {
-    public class Flower<PollenType>
+    public class Flower<TPollenType>
     {
-        private Configuration<PollenType> config = null;
-        private PollenType solution = default(PollenType);
+        private Configuration<TPollenType> config = null;
+        private TPollenType solution = default(TPollenType);
         private double fitness = 0;
         private bool fitnessNeedsUpdate = true;
 
         private Flower() { }
-        public Flower(Configuration<PollenType> config)
+        public Flower(Configuration<TPollenType> config)
         {
             this.config = config;
             this.solution = config.initializeSolutionFunction();
             this.fitnessNeedsUpdate = true;
         }
         
-        public PollenType getSolution() 
+        public TPollenType getSolution() 
         {
             return this.solution;
         }
@@ -36,9 +36,9 @@ namespace MSearch.Flowers
             return this.fitness;
         }
 
-        public Flower<PollenType> clone()
+        public Flower<TPollenType> clone()
         {
-            Flower<PollenType> ret = new Flower<PollenType>();
+            Flower<TPollenType> ret = new Flower<TPollenType>();
             ret.solution = this.config.cloneFunction(this.solution);
             ret.fitness = this.getFitness();
             ret.fitnessNeedsUpdate = this.fitnessNeedsUpdate;
@@ -46,7 +46,7 @@ namespace MSearch.Flowers
             return ret;
         }
 
-        public Flower<PollenType> doGlobalPollination(Flower<PollenType> gBest)
+        public Flower<TPollenType> doGlobalPollination(Flower<TPollenType> gBest)
         {
             var newFlower = this.clone();
             IList newFlowerSolList = newFlower.solution as IList;
@@ -55,7 +55,7 @@ namespace MSearch.Flowers
             {
                 newFlowerSolList[i] = (double)newFlowerSolList[i] + Distribution.generateLevy((double)gBestList[i] - (double)newFlowerSolList[i]);
             }
-            newFlower.solution = (PollenType)newFlowerSolList;
+            newFlower.solution = (TPollenType)newFlowerSolList;
             if (config.enforceHardObjective && !config.hardObjectiveFunction(newFlower.solution))
             {
                 return this.clone();
@@ -64,7 +64,7 @@ namespace MSearch.Flowers
             return newFlower;
         }
 
-        public Flower<PollenType> doLocalPollination(Flower<PollenType> flower1, Flower<PollenType> flower2)
+        public Flower<TPollenType> doLocalPollination(Flower<TPollenType> flower1, Flower<TPollenType> flower2)
         {
             var newFlower = this.clone();
             IList newFlowerSolList = newFlower.solution as IList;
@@ -75,7 +75,7 @@ namespace MSearch.Flowers
             {
                 newFlowerSolList[i] = (double)newFlowerSolList[i] + Number.Rnd(((double)flower1SolList[i] - (double)flower2SolList[i]));
             }
-            newFlower.solution = (PollenType)newFlowerSolList;
+            newFlower.solution = (TPollenType)newFlowerSolList;
             if (config.enforceHardObjective && !config.hardObjectiveFunction(newFlower.solution))
             {
                 return this.clone();

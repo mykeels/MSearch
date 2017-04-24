@@ -73,6 +73,7 @@
     <Compile Include="Selection.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Configuration.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

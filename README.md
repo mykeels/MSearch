@@ -23,6 +23,20 @@ Please see the [project documentation](Documentation.md) here.
 - Build the project to get a DLL in the bin/debug folder
 - Use the DLL in your project as the [license](LICENSE) allows
 
+### Installation
+
+You can install MSearch in your .NET Project via:
+
+##### Using Nuget Package Manager Console
+
+```
+PM> Install-Package MSearch
+```
+
+##### Using Nuget Package Manager
+
+Search for and Install MSearch
+
 ### Author(s)
 
  - Ikechi Michael I. ([github](https://github.com/mykeels), [twitter](https://twitter.com/mykeels))
