@@ -12,6 +12,9 @@ namespace MSearch.Flowers
         private Flower<TPollenType>[] _flowers = null;
         private Configuration<TPollenType> _config = null;
         private Flower<TPollenType> _gBest = null;
+        /// <summary>
+        /// aka pValue
+        /// </summary>
         private double _switchProbability = 0;
         private int _iterationCount = 0;
         private List<double> _iterationFitnessSequence = new List<double>();
@@ -34,6 +37,12 @@ namespace MSearch.Flowers
         {
             this._config = config;
             this._flowers = this.generateFlowers(config.populationSize);
+        }
+
+        public void create(Configuration<TPollenType> config, double _switchProbability = 0.3)
+        {
+            this.create(config);
+            this._switchProbability = _switchProbability;
         }
 
         public TPollenType fullIteration()
@@ -88,6 +97,7 @@ namespace MSearch.Flowers
 
         public TPollenType singleIteration()
         {
+            if (this._gBest == null) this._gBest = this.getBestFlower();
             for (int i = 0; i < this._flowers.Length; i++)
             {
                 var flower = this._flowers[i];
