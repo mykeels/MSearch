@@ -30,7 +30,7 @@ namespace MSearch.Tests.Flowers
             Pollination<double[]> garden = new Pollination<double[]>();
             BinaryKnapsack bKnapsack = new BinaryKnapsack();
             bKnapsack.Load($"data/knapsacks/json/mknapcb1/mknapcb1-1.json");
-            garden.create(bKnapsack.getConfiguration());
+            garden.create(bKnapsack.getConfiguration(), 0.4);
             garden.fullIteration();
         }
     }

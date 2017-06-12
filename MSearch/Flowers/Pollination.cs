@@ -15,7 +15,7 @@ namespace MSearch.Flowers
         /// <summary>
         /// aka pValue
         /// </summary>
-        private double _switchProbability = 0;
+        private double _switchProbability = 0.4;
         private int _iterationCount = 0;
         private List<double> _iterationFitnessSequence = new List<double>();
         public Pollination()
@@ -39,7 +39,7 @@ namespace MSearch.Flowers
             this._flowers = this.generateFlowers(config.populationSize);
         }
 
-        public void create(Configuration<TPollenType> config, double _switchProbability = 0.3)
+        public void create(Configuration<TPollenType> config, double _switchProbability)
         {
             this.create(config);
             this._switchProbability = _switchProbability;

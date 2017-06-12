@@ -13,9 +13,9 @@ namespace MSearch.Tests
         [TestMethod]
         public void Test_That_Normal_Levy_Distribution_Works()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
-                Console.WriteLine($"Normal Distribution:\t{Distribution.generateLevy(0.1)}");
+                Console.WriteLine($"Normal Distribution:\t{Distribution.generateLevy()}");
             }
         }
     }

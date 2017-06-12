@@ -51,10 +51,11 @@ namespace MSearch.Flowers
             var newFlower = this.clone();
             IList newFlowerSolList = newFlower.solution as IList;
             IList gBestList = gBest.solution as IList;
-            for (int i = 0; i < gBestList.Count; i++)
+            /*for (int i = 0; i < gBestList.Count; i++)
             {
                 newFlowerSolList[i] = (double)newFlowerSolList[i] + Distribution.generateLevy((double)gBestList[i] - (double)newFlowerSolList[i]);
-            }
+            }*/
+            newFlowerSolList = (IList)config.mutationFunction((TPollenType)newFlowerSolList);
             newFlower.solution = (TPollenType)newFlowerSolList;
             if (config.enforceHardObjective && !config.hardObjectiveFunction(newFlower.solution))
             {
