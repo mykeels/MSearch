@@ -25,6 +25,10 @@ namespace MSearch
         public int noOfIterations { get; set; }
         public int populationSize { get; set; }
         public Search.Direction movement { get; set; }
+        /// <summary>
+        /// Useful for LAHC Implementations
+        /// </summary>
+        public int tableSize { get; set; }
 
         public Configuration()
         {

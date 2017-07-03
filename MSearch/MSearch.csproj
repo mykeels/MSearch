@@ -68,6 +68,10 @@
     <Compile Include="HillClimb\HillClimb.cs" />
     <Compile Include="HillClimb\LateAcceptance.cs" />
     <Compile Include="IMetaHeuristic.cs" />
+    <Compile Include="Pigeons\BinaryPigeon.cs" />
+    <Compile Include="Pigeons\BinaryPIO.cs" />
+    <Compile Include="Pigeons\Pigeon.cs" />
+    <Compile Include="Pigeons\PigeonOptimize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SA\SimulatedAnnealing.cs" />
     <Compile Include="Selection.cs" />

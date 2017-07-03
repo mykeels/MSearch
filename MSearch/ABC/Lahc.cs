@@ -19,6 +19,7 @@ namespace MSearch.ABC
 
         public LAHC(int _tableSize = 2, double defaultTableValue = 0, Search.Direction movement = Search.Direction.Optimization)
         {
+            this.Movement = movement;
             this.Table = (new List<double>()).Fill(_tableSize, defaultTableValue);
             if (movement == Search.Direction.Optimization) defaultTableValue = Double.MaxValue;
             else defaultTableValue = Double.MinValue;

@@ -18,7 +18,7 @@ namespace MSearch.Tests.Problems.Knapsacks
             double[] newSol = new double[sol.Length];
             for (int i = 0; i < sol.Length; i++)
             {
-                newSol[i] = sol[i];
+                newSol[i] = sol[i] + 0;
             }
             return newSol;
         }

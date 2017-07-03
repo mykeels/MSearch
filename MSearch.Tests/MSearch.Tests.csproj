@@ -54,6 +54,7 @@
     <Compile Include="Helpers\IO\File.cs" />
     <Compile Include="Helpers\Site.cs" />
     <Compile Include="HillClimb\HillClimb_Tests.cs" />
+    <Compile Include="Pigeons\BinaryPIOKnapsackTests.cs" />
     <Compile Include="Problems\Knapsacks\BinaryKnapsack.cs" />
     <Compile Include="Problems\Knapsacks\BinaryKnapsack_Tests.cs" />
     <Compile Include="Problems\Knapsacks\Knapsack.cs" />
