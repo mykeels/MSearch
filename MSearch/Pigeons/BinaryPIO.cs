@@ -22,7 +22,7 @@ namespace MSearch.Pigeons
         private Configuration<TData[]> config { get; set; }
         private List<double> iterationFitnessSequence = new List<double>();
         private int iterationCount { get; set; }
-        private double _switchProbability { get; set; } = 0.2;
+        public double _switchProbability { get; set; } = 0.2;
 
         private TData[] getBestIndividual()
         {
@@ -96,12 +96,25 @@ namespace MSearch.Pigeons
                     }
                 }
             };
-            for (int i = 0; i < pigeons.Count; i++)
+            if (Number.Rnd() < _switchProbability)
             {
-                this.current = pigeons[i];
-                var newSol = this.config.mutationFunction(pigeons[i].getSolution());
-                updateBestFn(newSol);
-                pigeons[i].setSolution(newSol);
+                int a = Convert.ToInt32(Math.Floor(Number.Rnd() * pigeons.Count));
+                int b = Convert.ToInt32(Math.Floor(Number.Rnd() * pigeons.Count));
+                var newSol = GA.CrossOver.AutoTwoPoint(pigeons[a].getSolution(), pigeons[b].getSolution());
+                updateBestFn(newSol.ToArray().First().ToArray());
+                updateBestFn(newSol.ToArray().Last().ToArray());
+                pigeons[a].setSolution(newSol.ToArray().First().ToArray());
+                pigeons[b].setSolution(newSol.ToArray().Last().ToArray());
+            }
+            else
+            {
+                for (int i = 0; i < pigeons.Count; i++)
+                {
+                    this.current = pigeons[i];
+                    var newSol = this.config.mutationFunction(pigeons[i].getSolution());
+                    updateBestFn(newSol);
+                    pigeons[i].setSolution(newSol);
+                }
             }
             if (config.writeToConsole && ((iterationCount % config.consoleWriteInterval == 0) || (iterationCount - 1 == 0))) Console.WriteLine(iterationCount + " = " + localBestFitness + " \t " + globalBestFitness); // + "\t" + localBestSolution.ToJson()
             return this.getBestIndividual();

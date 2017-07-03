@@ -45,17 +45,19 @@ namespace MSearch.Tests.Pigeons
         [TestMethod]
         public void Test_That_Binary_PIO_Works()
         {
+            double mapFactor = 0.05;
+            double switchProbability = 0.2;
             BinaryKnapsack bKnapsack = new BinaryKnapsack();
             bKnapsack.Load($"data/knapsacks/json/mknapcb1/mknapcb1-1.json");
             BinaryPIO<double> pio = new BinaryPIO<double>();
-            double mapFactor = 0.2;
+            pio._switchProbability = switchProbability;
             var config = bKnapsack.getConfiguration();
-            config.populationSize = 15;
-            config.tableSize = 3;
-            config.noOfIterations = 50000;
+            config.populationSize = 200;
+            config.tableSize = 150;
+            config.noOfIterations = 1500;
             config.mutationFunction = (double[] sol) =>
             {
-                double[] velocity = updateVelocity(pio.getLocalBestSolution(), sol, pio.current.velocity, 
+                double[] velocity = updateVelocity(Number.Rnd() <= switchProbability ? pio.getLocalBestSolution() : pio.getGlobalBestSolution(), sol, pio.current.velocity,
                     mapFactor, config.noOfIterations);
                 return updateLocation(sol, velocity);
             };
