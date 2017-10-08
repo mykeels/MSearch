@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using MSearch.Extensions;
 using MSearch.Pigeons;
 using MSearch.Tests.Problems.Knapsacks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace MSearch.Tests.Pigeons
 {
-    [TestClass]
+    [TestFixture]
     public class BinaryPIOKnapsackTests
     {
 
-        [TestMethod]
+        [TestCase]
         public void Test_That_Binary_PIO_Works()
         {
             double mapFactor = 0.05;

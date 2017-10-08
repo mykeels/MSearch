@@ -22,9 +22,9 @@ namespace MSearch.Tests.Helpers.IO
             char splitter = '/';
             if (path.Contains(@"\")) splitter = '\\';
             string[] parts = path.Split(splitter);
-            if (System.IO.File.Exists(path)) return parts.First(parts.Count() - 1).Join("/");
+            if (System.IO.File.Exists(path)) return string.Join("/", parts.Take(parts.Count() - 1));
             else if (System.IO.Directory.Exists(path)) return path;
-            else return parts.First(parts.Count() - 1).Join("/");
+            else return string.Join("/", parts.Take(parts.Count() - 1));
         }
     }
 }

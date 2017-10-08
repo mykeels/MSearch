@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MSearch.Extensions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+using Newtonsoft.Json;
 
 namespace MSearch.Tests.Problems.Knapsacks
 {
-    [TestClass]
+    [TestFixture]
     public class BinaryKnapsack_Tests
     {
-        [TestMethod]
+        [TestCase]
         public void Test_That_Binary_Knapsack_GetInitial_Solution_Works()
         {
             BinaryKnapsack bKnapsack = new BinaryKnapsack();
@@ -19,13 +20,13 @@ namespace MSearch.Tests.Problems.Knapsacks
             {
                 bKnapsack.Load($"data/knapsacks/json/mknapcb1/mknapcb1-{i}.json");
                 double[] sol = bKnapsack.getInitialSolution();
-                Console.WriteLine($"{i}\tSolution: " + sol.ToJson());
+                Console.WriteLine($"{i}\tSolution: " + JsonConvert.SerializeObject(sol));
                 double fitness = bKnapsack.getFitness(sol);
                 Console.WriteLine($"{i}\tFitness: " + fitness);
             }
         }
 
-        [TestMethod]
+        [TestCase]
         public void Test_That_Binary_Knapsack_ToKnapsackList_Works()
         {
             BinaryKnapsack bKnapsack = new BinaryKnapsack();
@@ -33,8 +34,8 @@ namespace MSearch.Tests.Problems.Knapsacks
             {
                 bKnapsack.Load($"data/knapsacks/json/mknapcb1/mknapcb1-{i}.json");
                 double[] sol = bKnapsack.getInitialSolution();
-                Console.WriteLine($"{i}\tSolution: " + sol.ToJson());
-                Console.WriteLine($"{i}\tKnapsack_List: " + bKnapsack.toKnapsackList(sol).ToJson());
+                Console.WriteLine($"{i}\tSolution: " + JsonConvert.SerializeObject(sol));
+                Console.WriteLine($"{i}\tKnapsack_List: " + JsonConvert.SerializeObject(bKnapsack.toKnapsackList(sol)));
                 Console.WriteLine($"{i}\tFitness: " + bKnapsack.getFitness(sol));
             }
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MSearch.Common;
 using MSearch.Extensions;
+using Newtonsoft.Json;
 
 namespace MSearch.ABC
 {
@@ -143,7 +144,7 @@ namespace MSearch.ABC
                 if (Config.consoleWriteFunction == null)
                 {
                     Console.Write(_iterationCount + "\t" + _bestFitness + "");
-                    Console.Write("\t" + _bestFood.ToJson() + "\t");
+                    Console.Write("\t" + JsonConvert.SerializeObject(_bestFood) + "\t");
                     Console.Write("E-Bees: " + _employedCount + '\t');
                     Console.Write("On-Bees: " + Convert.ToInt32(Bees.Count - _employedCount) + '\t');
                     if ((Config.hardObjectiveFunction != null)) Console.Write("Hard: " + Config.hardObjectiveFunction.Invoke(_bestFood));
@@ -199,7 +200,7 @@ namespace MSearch.ABC
             IEnumerable<IBee<FoodType>> _employedBees = Bees.Where((IBee<FoodType> _bee) => { return _bee.GetBeeType().Equals(BeeTypeClass.Employed) & _bee.GetFood() != null; });
             List<double> fitnesses = _employedBees.Select(_bee => { return _bee.GetFitness(); }).ToList();
             double sum = fitnesses.Sum();
-            if (fitnesses.IsEmpty()) return default(FoodType);
+            if (fitnesses.Count == 0) return default(FoodType);
             return this.Config.selectionFunction.Invoke(_employedBees.Select((_bee) => _bee.GetFood()), fitnesses, 1).First();
             /*while (true)
             {

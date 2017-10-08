@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CADEEEA8-F2D9-4A82-A1B0-112BCCFE887F}</ProjectGuid>
+    <ProjectGuid>{7E0B8DDD-7EB7-451A-84E9-BEBA03B8734C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MSearch.Tests</RootNamespace>
     <AssemblyName>MSearch.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,10 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.8.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.8.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,6 +59,7 @@
     <Compile Include="Problems\Knapsacks\BinaryKnapsack.cs" />
     <Compile Include="Problems\Knapsacks\BinaryKnapsack_Tests.cs" />
     <Compile Include="Problems\Knapsacks\Knapsack.cs" />
+    <Compile Include="Problems\Knapsacks\Knapsack_HillClimb.cs" />
     <Compile Include="Problems\Knapsacks\Knapsack_Problem.cs" />
     <Compile Include="Problems\Knapsacks\Knapsack_Tests.cs" />
     <Compile Include="Problems\Sphere\Sphere.cs" />
@@ -65,9 +67,20 @@
     <Compile Include="SA\SimulatedAnnealing_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\Knapsacks\json\best-results.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Content Include="Data\Knapsacks\knapsack.txt" />
+    <Content Include="Data\Knapsacks\mkcbres.txt" />
+    <Content Include="Data\Knapsacks\mknapcb1.txt" />
+    <Content Include="Data\Knapsacks\mknapcb2.txt" />
+    <Content Include="Data\Knapsacks\mknapcb3.txt" />
+    <Content Include="Data\Knapsacks\mknapcb4.txt" />
+    <Content Include="Data\Knapsacks\mknapcb5.txt" />
+    <Content Include="Data\Knapsacks\mknapcb6.txt" />
+    <Content Include="Data\Knapsacks\mknapcb7.txt" />
+    <Content Include="Data\Knapsacks\mknapcb8.txt" />
+    <Content Include="Data\Knapsacks\mknapcb9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\Knapsacks\json\best-results.json" />
     <None Include="Data\Knapsacks\json\mknapcb1\mknapcb1-1.json" />
     <None Include="Data\Knapsacks\json\mknapcb1\mknapcb1-10.json" />
     <None Include="Data\Knapsacks\json\mknapcb1\mknapcb1-11.json" />
@@ -341,55 +354,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\Knapsacks\knapsack.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\Knapsacks\mkcbres.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\Knapsacks\mknapcb5.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\Knapsacks\mknapcb6.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\Knapsacks\mknapcb7.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\Knapsacks\mknapcb8.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\Knapsacks\mknapcb9.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\Knapsacks\mknapcb2.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\Knapsacks\mknapcb3.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\Knapsacks\mknapcb1.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\Knapsacks\mknapcb4.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MSearch\MSearch.csproj">
-      <Project>{22ae076f-fb8a-4ec3-8137-e39125ece00f}</Project>
+      <Project>{2eaa6490-f182-4aa1-b46c-17045dbf0b0c}</Project>
       <Name>MSearch</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

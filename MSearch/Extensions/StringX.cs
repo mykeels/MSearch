@@ -10,12 +10,12 @@ namespace MSearch.Extensions
     {
         public static string RandomLetters(int length)
         {
-            return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".Shuffle().First(length);
+            return string.Join(string.Empty, "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToList().Shuffle().Take(length));
         }
 
         public static string Random(int length)
         {
-            return "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".Shuffle().First(length);
+            return string.Join(string.Empty, "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToList().Shuffle().Take(length));
         }
     }
 }

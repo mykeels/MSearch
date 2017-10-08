@@ -15,12 +15,12 @@ namespace MSearch.Tests.Helpers.IO
             char splitter = '/';
             if (path.Contains(@"\")) splitter = '\\';
             string[] parts = path.Split(splitter);
-            return parts.LastOrDefault("");
+            return parts.LastOrDefault() ?? string.Empty;
         }
 
         public static string GetExtension(string path)
         {
-            return path.Split('.').LastOrDefault("file");
+            return path.Split('.').LastOrDefault() ?? "file";
         }
 
         public static string PreventNameClash(string fullPath)
@@ -30,11 +30,11 @@ namespace MSearch.Tests.Helpers.IO
             {
                 string folderPart = Directory.GetFolderPart(fullPath);
                 string filename = File.GetFileName(fullPath);
-                string newFileName = filename.Split('.').First(filename.Split('.').Count() - 1).Join(".") +
+                string newFileName = string.Join(".", filename.Split('.').Take(filename.Split('.').Count() - 1)) +
                     "-" + Convert.ToInt32(System.IO.Directory.GetFiles(folderPart).Count((file) =>
                     {
                         file = GetFileName(file);
-                        return file.StartsWith(filename.Split('.').First(filename.Split('.').Count() - 1).Join(".").Split('-').FirstOrDefault());
+                        return file.StartsWith(string.Join(".", filename.Split('.').Take(filename.Split('.').Count() - 1)).Split('-').FirstOrDefault());
                     }) + 1) + "." +
                     GetExtension(filename);
                 return folderPart.Trim('/') + "/" + newFileName;
@@ -63,7 +63,7 @@ namespace MSearch.Tests.Helpers.IO
             string[] myarray = path.Split(separator);
             if (System.IO.File.Exists(path))
             {
-                return myarray.First<string>((myarray.Count<string>() - 1)).Join("/");
+                return string.Join("/", myarray.Take((myarray.Count<string>() - 1)));
             }
             if (System.IO.Directory.Exists(path))
             {

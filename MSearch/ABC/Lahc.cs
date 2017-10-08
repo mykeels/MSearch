@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MSearch.Extensions;
 using MSearch.Common;
+using System.Linq;
 
 namespace MSearch.ABC
 {
@@ -20,7 +21,11 @@ namespace MSearch.ABC
         public LAHC(int _tableSize = 2, double defaultTableValue = 0, Search.Direction movement = Search.Direction.Optimization)
         {
             this.Movement = movement;
-            this.Table = (new List<double>()).Fill(_tableSize, defaultTableValue);
+            this.Table = (new List<double>());
+            for (int i = 1; i <= _tableSize; i++)
+            {
+                this.Table.Add(defaultTableValue);
+            }
             if (movement == Search.Direction.Optimization) defaultTableValue = Double.MaxValue;
             else defaultTableValue = Double.MinValue;
         }

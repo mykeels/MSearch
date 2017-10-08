@@ -7,14 +7,14 @@ using MSearch.Tests.Problems.Knapsacks;
 using MSearch.Tests.Problems.Sphere;
 using MSearch.HillClimb;
 using MSearch.Tests.Common;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace MSearch.Tests.HillClimb
 {
-    [TestClass]
+    [TestFixture]
     public class HillClimb_Tests: Knapsack
     {
-        [TestMethod]
+        [TestCase]
         public void Test_That_Knapsack_Hill_Climbing_Works()
         {
             this.Load(Constants.SAMPLE_MKNAPCB4_DATASET);
@@ -24,7 +24,7 @@ namespace MSearch.Tests.HillClimb
             List<int> finalSolution = hillClimb.fullIteration();
         }
 
-        [TestMethod]
+        [TestCase]
         public void Test_That_HillClimb_On_Sphere_Works()
         {
             HillClimb<double[]> garden = new HillClimb<double[]>();

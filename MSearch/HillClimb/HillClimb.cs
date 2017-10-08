@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MSearch.Extensions;
 using MSearch.Common;
+using Newtonsoft.Json;
 
 namespace MSearch.HillClimb
 {
@@ -68,7 +69,7 @@ namespace MSearch.HillClimb
                     _bestFitness = newFit;
                 }
             }
-            if (Config.writeToConsole && ((_iterationCount % Config.consoleWriteInterval == 0) || (_iterationCount - 1 == 0))) Console.WriteLine(_iterationCount + "\t" + _bestIndividual.ToJson() + " = " + _bestFitness);
+            if (Config.writeToConsole && ((_iterationCount % Config.consoleWriteInterval == 0) || (_iterationCount - 1 == 0))) Console.WriteLine(_iterationCount + "\t" + JsonConvert.SerializeObject(_bestIndividual) + " = " + _bestFitness);
             return _bestIndividual;
         }
 

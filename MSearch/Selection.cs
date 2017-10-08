@@ -20,7 +20,7 @@ namespace MSearch
 
         private static IEnumerable<SolutionType> Rank<SolutionType>(IEnumerable<SolutionType> Solutions, Func<SolutionType, double> fitnessFunction)
         {
-            List<SolutionType> ret = Solutions.Clone().ToList();
+            List<SolutionType> ret = Solutions.ToList(); //Solutions should be CLONED
             ret.Sort(delegate (SolutionType sol1, SolutionType sol2)
             {
                 return fitnessFunction(sol1).CompareTo(fitnessFunction(sol2));
@@ -31,7 +31,7 @@ namespace MSearch
         private static IEnumerable<SolutionType> Rank<SolutionType>(IEnumerable<SolutionType> Solutions, IEnumerable<double> fitnesses)
         {
             List<KeyValuePair<SolutionType, double>> ret = new List<KeyValuePair<SolutionType, double>>();
-            List<SolutionType> sols = Solutions.Clone().ToList();
+            List<SolutionType> sols = Solutions.ToList(); //Solutions should be CLONED
 
             { //populate the keyvalue list
                 int index = 0;
@@ -113,7 +113,7 @@ namespace MSearch
             {
                 if (ret.Count >= selectCount) return ret.AsEnumerable();
                 int j = 1;
-                while (fitnesses.First(j).Sum() < fitnesses.ElementAt(i)) j++;
+                while (fitnesses.Take(j).Sum() < fitnesses.ElementAt(i)) j++;
                 ret.Add(Solutions.ElementAt(j));
             }
             return ret.AsEnumerable();
@@ -128,7 +128,7 @@ namespace MSearch
             {
                 if (ret.Count >= selectCount) return ret.AsEnumerable();
                 int j = 1;
-                while (fitnesses.First(j).Sum() < fitnesses[i]) j++;
+                while (fitnesses.Take(j).Sum() < fitnesses[i]) j++;
                 ret.Add(Solutions.ElementAt(j));
             }
             return ret.AsEnumerable();

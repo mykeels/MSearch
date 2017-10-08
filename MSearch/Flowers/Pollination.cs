@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace MSearch.Flowers
 {
@@ -54,7 +55,7 @@ namespace MSearch.Flowers
                 this._iterationFitnessSequence.Add(_bestFitness);
                 if (this._config.writeToConsole && ((_iterationCount % this._config.consoleWriteInterval) == 0))
                 {
-                    if (this._config.consoleWriteFunction == null) Console.WriteLine(_iterationCount + "\t" + _bestSolution.ToJson() + " = " + _bestFitness);
+                    if (this._config.consoleWriteFunction == null) Console.WriteLine(_iterationCount + "\t" + JsonConvert.SerializeObject(_bestSolution) + " = " + _bestFitness);
                     else this._config.consoleWriteFunction(_bestSolution, _bestFitness, _iterationCount);
                 }
                 this._iterationCount++;

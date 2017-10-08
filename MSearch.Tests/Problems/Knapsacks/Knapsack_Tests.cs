@@ -7,11 +7,11 @@ using MSearch.Extensions;
 using MSearch.Tests.Common;
 using MSearch.Tests.Helpers.IO;
 using Newtonsoft.Json;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace MSearch.Tests.Problems.Knapsacks
 {
-    [TestClass]
+    [TestFixture]
     public class Knapsack_Tests
     {
         private void saveKnapsacksToFile(List<Knapsack> knapsacks, string folderName, List<Knapsack_Problem.BestResult> results)
@@ -24,7 +24,8 @@ namespace MSearch.Tests.Problems.Knapsacks
             {
                 var knapsack = knapsacks[i];
                 knapsack.goal = results.First(result => result.filename == folderName && result.index == (i + 1)).best;
-                knapsack.ToJson().SaveToFile($"data/knapsacks/json/{folderName}/{folderName}-{i + 1}.json");
+                string jsonFileContent = JsonConvert.SerializeObject(knapsack);
+                System.IO.File.WriteAllText($"data/knapsacks/json/{folderName}/{folderName}-{i + 1}.json", jsonFileContent);
             }
         }
 
@@ -33,7 +34,7 @@ namespace MSearch.Tests.Problems.Knapsacks
             return JsonConvert.DeserializeObject<List<Knapsack_Problem.BestResult>>(System.IO.File.ReadAllText($"data/knapsacks/json/best-results.json"));
         }
 
-        //[TestMethod]
+        //[TestCase]
         public void Test_That_Read_Problem_Works()
         {
             var results = getBestResults();
@@ -43,21 +44,21 @@ namespace MSearch.Tests.Problems.Knapsacks
                 List<Knapsack> ret = knapsackProblem.readProblem($"data/knapsacks/mknapcb{i}.txt");
                 Console.WriteLine($"No of Knapsacks: {ret.Count}");
                 Assert.AreEqual(ret.Count, 30, "No. of Knapsacks must equal 30");
-                Console.WriteLine(ret.ToJson(true));
+                Console.WriteLine(JsonConvert.SerializeObject(ret, Formatting.Indented));
                 saveKnapsacksToFile(ret, $"mknapcb{i}", results);
             }
         }
 
-        //[TestMethod]
+        //[TestCase]
         public void Test_That_Knapsack_Load_Works()
         {
             Knapsack knapsack = new Knapsack();
             knapsack.Load("data/knapsacks/json/mknapcb1/mknapcb1-1.json");
             Assert.AreNotEqual(knapsack.weights.Count, 0);
-            Console.WriteLine(knapsack.ToJson(true));
+            Console.WriteLine(JsonConvert.SerializeObject(knapsack, Formatting.Indented));
         }
 
-        [TestMethod]
+        [TestCase]
         public void Test_That_Knapsack_Get_Initial_Solution_Works()
         {
             Knapsack knapsack = new Knapsack();
@@ -67,7 +68,7 @@ namespace MSearch.Tests.Problems.Knapsacks
                 for (int length = 1; length <= 5; length++)
                 {
                     List<int> sol = knapsack.getInitialSolution(length);
-                    Console.WriteLine($"{i}\tSolution: " + sol.ToJson());
+                    Console.WriteLine($"{i}\tSolution: " + JsonConvert.SerializeObject(sol));
                     Assert.AreEqual(sol.Count, length, "solution length must be " + length);
                     double fitness = knapsack.getFitness(sol);
                     Console.WriteLine($"{i}\tFitness: " + fitness);

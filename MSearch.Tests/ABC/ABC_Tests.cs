@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using MSearch.Tests.Problems.Knapsacks;
 using MSearch.Tests.Common;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Newtonsoft.Json;
 using MSearch.ABC;
 
 namespace MSearch.Tests.ABC
 {
-    [TestClass]
+    [TestFixture]
     public class ABC_Tests: Knapsack
     {
-        [TestMethod]
+        [TestCase]
         public void Test_That_Knapsack_ABC_Works(Knapsack k)
         {
             this.Load(Constants.SAMPLE_MKNAPCB4_DATASET);
@@ -21,7 +21,7 @@ namespace MSearch.Tests.ABC
             List<int> finalResult =  hive.fullIteration();
         }
 
-        [TestMethod]
+        [TestCase]
         [Description("Test That FailureLimit and AcceptProbability are defaults when instantiated with default constructor")]
         public void Test_That_FailureLimit_And_AcceptProbability_Are_Defaults()
         {
