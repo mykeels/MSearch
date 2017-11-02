@@ -116,7 +116,6 @@ namespace MSearch.Pigeons
                     pigeons[i].setSolution(newSol);
                 }
             }
-            
 
             if (config.writeToConsole && ((iterationCount % config.consoleWriteInterval) == 0) || (iterationCount - 1 == 0))
             {
