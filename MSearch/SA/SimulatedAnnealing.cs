@@ -105,7 +105,12 @@ namespace MSearch.SA
                 }
             }
 
-            if (Config.writeToConsole && (_iterationCount % Config.consoleWriteInterval == 0)) Console.WriteLine(_iterationCount + "\t" + JsonConvert.SerializeObject(_bestIndividual) + " = " + _bestFitness);
+            if (Config.writeToConsole && ((_iterationCount % Config.consoleWriteInterval) == 0) || (_iterationCount - 1 == 0))
+            {
+                if (Config.consoleWriteFunction == null) Console.WriteLine(_iterationCount + "\t" + JsonConvert.SerializeObject(_bestIndividual) + " = " + _bestFitness);
+                else Config.consoleWriteFunction(_bestIndividual, _bestFitness, _iterationCount);
+            }
+
             return _currentIndividual; //current individual is returned
         }
 

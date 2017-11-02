@@ -116,7 +116,14 @@ namespace MSearch.Pigeons
                     pigeons[i].setSolution(newSol);
                 }
             }
-            if (config.writeToConsole && ((iterationCount % config.consoleWriteInterval == 0) || (iterationCount - 1 == 0))) Console.WriteLine(iterationCount + " = " + localBestFitness + " \t " + globalBestFitness); // + "\t" + localBestSolution.ToJson()
+            
+
+            if (config.writeToConsole && ((iterationCount % config.consoleWriteInterval) == 0) || (iterationCount - 1 == 0))
+            {
+                if (config.consoleWriteFunction == null) Console.WriteLine(iterationCount + "\t" + Newtonsoft.Json.JsonConvert.SerializeObject(this.getBestIndividual()) + " = " + localBestFitness + "\t" + globalBestFitness);
+                else config.consoleWriteFunction(this.getBestIndividual(), globalBestFitness, iterationCount);
+            }
+            
             return this.getBestIndividual();
         }
 
