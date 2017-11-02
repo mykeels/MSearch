@@ -63,6 +63,7 @@
     <Compile Include="Problems\Knapsacks\Knapsack_Problem.cs" />
     <Compile Include="Problems\Knapsacks\Knapsack_Tests.cs" />
     <Compile Include="Problems\Sphere\Sphere.cs" />
+    <Compile Include="Problems\Sphere\SphereList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SA\SimulatedAnnealing_Tests.cs" />
   </ItemGroup>

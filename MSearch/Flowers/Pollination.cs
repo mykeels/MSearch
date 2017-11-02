@@ -11,7 +11,7 @@ namespace MSearch.Flowers
     public class Pollination<TPollenType>: IMetaHeuristic<TPollenType>
     {
         private Flower<TPollenType>[] _flowers = null;
-        private Configuration<TPollenType> _config = null;
+        private Configuration<List<TPollenType>> _config = null;
         private Flower<TPollenType> _gBest = null;
         /// <summary>
         /// aka pValue
@@ -26,7 +26,7 @@ namespace MSearch.Flowers
 
         private Flower<TPollenType>[] generateFlowers(int count)
         {
-            List<Flower<TPollenType>> flowers = new List<Flower<TPollenType>>();
+            var flowers = new List<Flower<TPollenType>>();
             for (int i = 0; i < count; i++)
             {
                 flowers.Add(new Flower<TPollenType>(_config));
@@ -34,19 +34,19 @@ namespace MSearch.Flowers
             return flowers.ToArray();
         }
 
-        public void create(Configuration<TPollenType> config)
+        public void create(Configuration<List<TPollenType>> config)
         {
             this._config = config;
             this._flowers = this.generateFlowers(config.populationSize);
         }
 
-        public void create(Configuration<TPollenType> config, double _switchProbability)
+        public void create(Configuration<List<TPollenType>> config, double _switchProbability)
         {
             this.create(config);
             this._switchProbability = _switchProbability;
         }
 
-        public TPollenType fullIteration()
+        public List<TPollenType> fullIteration()
         {
             while (_iterationCount < _config.noOfIterations)
             {
@@ -96,7 +96,7 @@ namespace MSearch.Flowers
             return _gBest;
         }
 
-        public TPollenType singleIteration()
+        public List<TPollenType> singleIteration()
         {
             if (this._gBest == null) this._gBest = this.getBestFlower();
             for (int i = 0; i < this._flowers.Length; i++)
@@ -125,6 +125,21 @@ namespace MSearch.Flowers
             }
             this._gBest = this.getBestFlower();
             return this._gBest.getSolution();
+        }
+
+        public void create(Configuration<TPollenType> config)
+        {
+            throw new NotImplementedException();
+        }
+
+        TPollenType IMetaHeuristic<TPollenType>.singleIteration()
+        {
+            throw new NotImplementedException();
+        }
+
+        TPollenType IMetaHeuristic<TPollenType>.fullIteration()
+        {
+            throw new NotImplementedException();
         }
     }
 }

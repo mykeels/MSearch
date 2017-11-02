@@ -18,8 +18,8 @@ namespace MSearch.Tests.Flowers
         [TestCase]
         public void Test_That_Flower_Pollination_On_Sphere_Works()
         {
-            Pollination<double[]> garden = new Pollination<double[]>();
-            Sphere sphere = new Sphere();
+            Pollination<double> garden = new Pollination<double>();
+            SphereList sphere = new SphereList();
             garden.create(sphere.getConfiguration());
             garden.fullIteration();
         }
@@ -27,11 +27,11 @@ namespace MSearch.Tests.Flowers
         [TestCase]
         public void Test_That_Flower_Pollination_On_Binary_Knapsack_Works()
         {
-            Pollination<double[]> garden = new Pollination<double[]>();
-            BinaryKnapsack bKnapsack = new BinaryKnapsack();
-            bKnapsack.Load($"data/knapsacks/json/mknapcb1/mknapcb1-1.json");
-            garden.create(bKnapsack.getConfiguration(), 0.4);
-            garden.fullIteration();
+            // Pollination<double[]> garden = new Pollination<double[]>();
+            // BinaryKnapsack bKnapsack = new BinaryKnapsack();
+            // bKnapsack.Load($"data/knapsacks/json/mknapcb1/mknapcb1-1.json");
+            // garden.create(bKnapsack.getConfiguration(), 0.4);
+            // garden.fullIteration();
         }
     }
 }
