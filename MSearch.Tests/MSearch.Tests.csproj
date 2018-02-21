@@ -6,6 +6,12 @@
     <Compile Remove="Extensions\ObjectExtensions.cs" />
     <Compile Remove="Extensions\StringExtensions.cs" />
   </ItemGroup>
+  <ItemGroup>  
+      <MySourceFiles Include=".\Data\Knapsacks\**\*.*"/>  
+  </ItemGroup>
+  <Target Name="CopyFiles" AfterTargets="AfterBuild">  
+      <Copy SourceFiles="@(MySourceFiles)" DestinationFolder="$(OutDir)Data\Knapsacks\%(RecursiveDir)" />  
+  </Target>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
