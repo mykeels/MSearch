@@ -11,13 +11,13 @@ namespace MSearch.Tests.ABC
     [TestFixture]
     public class ABC_Tests: Knapsack
     {
-        [TestCase]
-        public void Test_That_Knapsack_ABC_Works(Knapsack k)
+        [TestCase(Constants.SAMPLE_MKNAPCB4_DATASET)]
+        public void Test_That_Knapsack_ABC_Works(string filename)
         {
-            this.Load(Constants.SAMPLE_MKNAPCB4_DATASET);
+            this.Load(filename);
             Console.WriteLine($"Goal:\t{this.goal}");
             Hive<List<int>, Bee<List<int>>> hive = new Hive<List<int>, Bee<List<int>>>();
-            hive.create(k.getConfiguration());
+            hive.create(this.getConfiguration());
             List<int> finalResult =  hive.fullIteration();
         }
 
