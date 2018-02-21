@@ -27,10 +27,10 @@ namespace MSearch.Tests.HillClimb
         [TestCase]
         public void Test_That_HillClimb_On_Sphere_Works()
         {
-            HillClimb<double[]> garden = new HillClimb<double[]>();
+            HillClimb<double[]> hill = new HillClimb<double[]>();
             Sphere sphere = new Sphere();
-            garden.create(sphere.getConfiguration());
-            garden.fullIteration();
+            hill.create(sphere.getConfiguration());
+            hill.fullIteration();
         }
     }
 }
