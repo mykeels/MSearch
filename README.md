@@ -8,7 +8,7 @@ In computer science and mathematical optimization, a meta-heuristic is a higher-
 
 Please see the [project documentation](Documentation.md) here.
 
-### Algorithms available
+### Algorithms and Samples
 
 - [Artificial Bee Colony (ABC)](MSearch/ABC)
 - [Flower Pollination Algorithm](MSearch/Flowers)
@@ -33,10 +33,8 @@ You can install MSearch in your .NET Project via:
 PM> Install-Package MSearch
 ```
 
-##### Using Nuget Package Manager
+#### Using DotNet CLI
 
-Search for and Install MSearch
-
-### Author(s)
-
- - Ikechi Michael I. ([github](https://github.com/mykeels), [twitter](https://twitter.com/mykeels))
+```bash
+dotnet add package MSearch
+```
