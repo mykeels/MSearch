@@ -7,14 +7,13 @@ using MSearch.HillClimb;
 using MSearch.Tests.Common;
 using MSearch.Extensions;
 using Newtonsoft.Json;
-using NUnit.Framework;
+using Xunit;
 
 namespace MSearch.Tests.Problems.Knapsacks
 {
-    [TestFixture]
     public class Knapsack_HillClimb
     {
-        [TestCase]
+        [Fact]
         public void Test_That_Knapsack_Hill_Climbing_Works()
         {
             Knapsack knapsack = new Knapsack();

@@ -7,11 +7,10 @@ using MSearch.Extensions;
 using MSearch.Tests.Common;
 using MSearch.Tests.Helpers.IO;
 using Newtonsoft.Json;
-using NUnit.Framework;
+using Xunit;
 
 namespace MSearch.Tests.Problems.Knapsacks
 {
-    [TestFixture]
     public class Knapsack_Tests
     {
         private void saveKnapsacksToFile(List<Knapsack> knapsacks, string folderName, List<Knapsack_Problem.BestResult> results)
@@ -43,22 +42,22 @@ namespace MSearch.Tests.Problems.Knapsacks
                 Knapsack_Problem knapsackProblem = new Knapsack_Problem();
                 List<Knapsack> ret = knapsackProblem.readProblem($"data/knapsacks/mknapcb{i}.txt");
                 Console.WriteLine($"No of Knapsacks: {ret.Count}");
-                Assert.AreEqual(ret.Count, 30, "No. of Knapsacks must equal 30");
+                Assert.Equal(ret.Count, 30);
                 Console.WriteLine(JsonConvert.SerializeObject(ret, Formatting.Indented));
                 saveKnapsacksToFile(ret, $"mknapcb{i}", results);
             }
         }
 
-        //[TestCase]
+        [Fact]
         public void Test_That_Knapsack_Load_Works()
         {
             Knapsack knapsack = new Knapsack();
             knapsack.Load("data/knapsacks/json/mknapcb1/mknapcb1-1.json");
-            Assert.AreNotEqual(knapsack.weights.Count, 0);
+            Assert.NotEqual(knapsack.weights.Count, 0);
             Console.WriteLine(JsonConvert.SerializeObject(knapsack, Formatting.Indented));
         }
 
-        [TestCase]
+        [Fact]
         public void Test_That_Knapsack_Get_Initial_Solution_Works()
         {
             Knapsack knapsack = new Knapsack();
@@ -69,7 +68,7 @@ namespace MSearch.Tests.Problems.Knapsacks
                 {
                     List<int> sol = knapsack.getInitialSolution(length);
                     Console.WriteLine($"{i}\tSolution: " + JsonConvert.SerializeObject(sol));
-                    Assert.AreEqual(sol.Count, length, "solution length must be " + length);
+                    Assert.Equal(sol.Count, length);
                     double fitness = knapsack.getFitness(sol);
                     Console.WriteLine($"{i}\tFitness: " + fitness);
                 }

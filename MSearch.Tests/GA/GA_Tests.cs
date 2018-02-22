@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using MSearch.Tests.Problems.Knapsacks;
 using MSearch.Tests.Common;
-using NUnit.Framework;
+using Xunit;
 using MSearch.GA;
 using MSearch.Tests.Problems.Sphere;
 
 namespace MSearch.Tests.GA
 {
-    [TestFixture]
     public class GA_Tests: Knapsack
     {
-        [TestCase]
+        [Fact]
         public void Test_That_Knapsack_Genetic_Algorithm_Works()
         {
             this.Load(Constants.SAMPLE_MKNAPCB4_DATASET);
@@ -24,7 +23,7 @@ namespace MSearch.Tests.GA
             List<int> finalSolution = ga.fullIteration();
         }
 
-        [TestCase]
+        [Fact]
         public void Test_That_Genetic_Algorithm_On_Sphere_Works()
         {
             GeneticAlgorithm<double[]> garden = new GeneticAlgorithm<double[]>((double[] sol1, double[] sol2) => {

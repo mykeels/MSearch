@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MSearch.Extensions;
-using NUnit.Framework;
+using Xunit;
 using Newtonsoft.Json;
 
 namespace MSearch.Tests.Problems.Knapsacks
 {
-    [TestFixture]
     public class BinaryKnapsack_Tests
     {
-        [TestCase]
+        [Fact]
         public void Test_That_Binary_Knapsack_GetInitial_Solution_Works()
         {
             BinaryKnapsack bKnapsack = new BinaryKnapsack();
@@ -26,7 +25,7 @@ namespace MSearch.Tests.Problems.Knapsacks
             }
         }
 
-        [TestCase]
+        [Fact]
         public void Test_That_Binary_Knapsack_ToKnapsackList_Works()
         {
             BinaryKnapsack bKnapsack = new BinaryKnapsack();
