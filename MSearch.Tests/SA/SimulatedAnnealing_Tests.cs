@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using MSearch.Tests.Problems.Knapsacks;
 using MSearch.Tests.Common;
-using Xunit;
 using MSearch.Tests.Problems.Sphere;
 using MSearch.SA;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MSearch.Tests.SA
 {
+    [TestClass]
     public class SimulatedAnnealing_Tests: Knapsack
     {
-        [Fact]
+        [TestMethod]
         public void Test_That_Knapsack_Simulated_Annealing_Works()
         {
             this.Load(Constants.SAMPLE_MKNAPCB4_DATASET);
@@ -23,7 +24,7 @@ namespace MSearch.Tests.SA
             List<int> finalSolution = sa.fullIteration();
         }
 
-        [Fact]
+        [TestMethod]
         public void Test_That_Simulated_Annealing_On_Sphere_Works()
         {
             SimulatedAnnealing<double[]> garden = new SimulatedAnnealing<double[]>();

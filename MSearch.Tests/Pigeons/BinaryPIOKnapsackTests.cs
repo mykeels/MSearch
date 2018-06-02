@@ -6,20 +6,21 @@ using System.Threading.Tasks;
 using MSearch.Extensions;
 using MSearch.Pigeons;
 using MSearch.Tests.Problems.Knapsacks;
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MSearch.Tests.Pigeons
 {
+    [TestClass]
     public class BinaryPIOKnapsackTests
     {
 
-        [Fact]
+        [TestMethod]
         public void Test_That_Binary_PIO_Works()
         {
             double mapFactor = 0.05;
             double switchProbability = 0.2;
             BinaryKnapsack bKnapsack = new BinaryKnapsack();
-            bKnapsack.Load($"data/knapsacks/json/mknapcb1/mknapcb1-1.json");
+            bKnapsack.Load($"Data/Knapsacks/json/mknapcb1/mknapcb1-1.json");
             BinaryPIO<double> pio = new BinaryPIO<double>();
             pio._switchProbability = switchProbability;
             var config = bKnapsack.getConfiguration();
