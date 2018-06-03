@@ -7,10 +7,11 @@ using MSearch.Extensions;
 using MSearch.Tests.Common;
 using MSearch.Tests.Helpers.IO;
 using Newtonsoft.Json;
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MSearch.Tests.Problems.Knapsacks
 {
+    [TestClass]
     public class Knapsack_Tests
     {
         private void saveKnapsacksToFile(List<Knapsack> knapsacks, string folderName, List<Knapsack_Problem.BestResult> results)
@@ -42,33 +43,33 @@ namespace MSearch.Tests.Problems.Knapsacks
                 Knapsack_Problem knapsackProblem = new Knapsack_Problem();
                 List<Knapsack> ret = knapsackProblem.readProblem($"data/knapsacks/mknapcb{i}.txt");
                 Console.WriteLine($"No of Knapsacks: {ret.Count}");
-                Assert.Equal(ret.Count, 30);
+                Assert.AreEqual(ret.Count, 30);
                 Console.WriteLine(JsonConvert.SerializeObject(ret, Formatting.Indented));
                 saveKnapsacksToFile(ret, $"mknapcb{i}", results);
             }
         }
 
-        [Fact]
+        [TestMethod]
         public void Test_That_Knapsack_Load_Works()
         {
             Knapsack knapsack = new Knapsack();
-            knapsack.Load("data/knapsacks/json/mknapcb1/mknapcb1-1.json");
-            Assert.NotEqual(knapsack.weights.Count, 0);
+            knapsack.Load("Data/Knapsacks/json/mknapcb1/mknapcb1-1.json");
+            Assert.AreNotEqual(knapsack.weights.Count, 0);
             Console.WriteLine(JsonConvert.SerializeObject(knapsack, Formatting.Indented));
         }
 
-        [Fact]
+        [TestMethod]
         public void Test_That_Knapsack_Get_Initial_Solution_Works()
         {
             Knapsack knapsack = new Knapsack();
             for (int i = 1; i <= 5; i++)
             {
-                knapsack.Load($"data/knapsacks/json/mknapcb1/mknapcb1-{i}.json");
+                knapsack.Load($"Data/Knapsacks/json/mknapcb1/mknapcb1-{i}.json");
                 for (int length = 1; length <= 5; length++)
                 {
                     List<int> sol = knapsack.getInitialSolution(length);
                     Console.WriteLine($"{i}\tSolution: " + JsonConvert.SerializeObject(sol));
-                    Assert.Equal(sol.Count, length);
+                    Assert.AreEqual(sol.Count, length);
                     double fitness = knapsack.getFitness(sol);
                     Console.WriteLine($"{i}\tFitness: " + fitness);
                 }
