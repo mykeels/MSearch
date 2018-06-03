@@ -204,6 +204,7 @@ namespace MSearch.Tests.Problems.Knapsacks
             config.selectionFunction = Selection.RoulleteWheel;
             config.writeToConsole = true;
             config.consoleWriteInterval = 100;
+            config.writeToConsole = false;
             config.hardObjectiveFunction = (List<int> sol) =>
             {
                 return this.getFitness(sol) < Double.MaxValue;

@@ -26,8 +26,8 @@ namespace MSearch.Tests.ABC
         public void Test_That_FailureLimit_And_AcceptProbability_Are_Defaults()
         {
             Hive<int[], Bee<int[]>> hive = new Hive<int[], Bee<int[]>>();
-            Assert.Equal(hive.getFailureLimit(), 20);
-            Assert.Equal(hive.getAcceptanceProbability(), 0.4);
+            Assert.Equal(20, hive.getFailureLimit());
+            Assert.Equal(0.4, hive.getAcceptanceProbability());
             Console.WriteLine("Hive:\n" + JsonConvert.SerializeObject(hive, Formatting.Indented));
             Console.WriteLine("Hive Failure Limit:\t" + hive.getFailureLimit());
             Console.WriteLine("Hive Acceptance Probability:\t" + hive.getAcceptanceProbability());
